@@ -14,9 +14,10 @@ public class Main {
 
         //тестируем методы
         ArrayList myArrayList = placeChanger.arrToArrayList(intArr);
-
-        myArrayList = placeChanger.arrToArrayList(intSecondArr);
         System.out.println(myArrayList.toString());
+        ArrayList myArrayList2 = placeChanger.arrToArrayList(intSecondArr);
+        System.out.println(myArrayList2.toString());
+
 
 
 

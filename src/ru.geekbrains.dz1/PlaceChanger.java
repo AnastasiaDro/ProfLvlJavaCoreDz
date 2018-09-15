@@ -26,7 +26,11 @@ public class PlaceChanger <T> {
     // Задание 2
     // метод преобразования массива в ArrayList
     public ArrayList arrToArrayList(T[] arr) {
-        newArrayList.add(Arrays.asList(arr));
+        newArrayList.clear();
+        for (int i = 0; i < arr.length; i++) {
+            newArrayList.add( arr[i]);
+        }
+
         return newArrayList;
     }
 
