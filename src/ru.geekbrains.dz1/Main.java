@@ -28,7 +28,7 @@ public class Main {
         placeChanger.placeChangerByIndex(strArr,  1,2);
         System.out.println("Массив intSecondArr с поменяными местами элементами" + Arrays.asList(strArr));
         System.out.println();
-        
+
         //Метод преобразования в ArrayList
         System.out.println("преобразуем оба массива в ArrayList-ы");
         ArrayList myArrayList = placeChanger.arrToArrayList(intArr);
