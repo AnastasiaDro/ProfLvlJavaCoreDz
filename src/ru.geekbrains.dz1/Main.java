@@ -13,8 +13,15 @@ public class Main {
         PlaceChanger placeChanger = new PlaceChanger<>();
 
         //тестируем методы
+
+
+
+
+        //Метод преобразования в ArrayList
         ArrayList myArrayList = placeChanger.arrToArrayList(intArr);
         System.out.println(myArrayList.toString());
+        //Покажем, что можем использовать его несколько раз и будут правильные результаты (при каждом вызове происходит очистка newArraylist
+        //что позволяет не создавать много ArrayLIst-ов или экземпляров класса PlaceChanger
         ArrayList myArrayList2 = placeChanger.arrToArrayList(intSecondArr);
         System.out.println(myArrayList2.toString());
 
