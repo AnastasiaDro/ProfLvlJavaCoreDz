@@ -1,6 +1,5 @@
 package ru.geekbrains.dz1;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -37,10 +36,6 @@ public class Main {
         //что позволяет не создавать много ArrayLIst-ов или экземпляров класса PlaceChanger
         ArrayList myArrayList2 = arrayChanger.arrToArrayList(strArr);
         System.out.println("A вот  - из массива strArr" + myArrayList2.toString());
-
-
-
-
 
     }
 }
