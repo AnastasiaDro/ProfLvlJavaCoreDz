@@ -1,12 +1,21 @@
 package ru.geekbrains.dz1;
 
-import java.util.ArrayList;
 
 public class PlaceChanger <T> {
-    T[] arr;
+    private T[] arr;
+    //переменная для записи элемента
+    private T container;
 
     public PlaceChanger (T[] arr) {
         this.arr = arr;
+    }
+
+    //сам метод смены мест ПО ИНДЕКСУ
+    public T[] placeChangerByIndex (int firstIndex, int secondIndex) {
+        container = arr[firstIndex];
+        arr[firstIndex] = arr[secondIndex];
+        arr[secondIndex] = container;
+        return arr;
     }
 
 
