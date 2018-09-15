@@ -3,16 +3,13 @@ package ru.geekbrains.dz1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class PlaceChanger <T> {
-    private T[] arr;
     //переменная для записи элемента
     private T container;
-    private ArrayList newArrayList;
+    private ArrayList newArrayList = new ArrayList();
 
     public PlaceChanger () {
-
     }
 
     // Задание 1
