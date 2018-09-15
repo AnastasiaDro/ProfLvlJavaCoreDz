@@ -10,8 +10,8 @@ public class PlaceChanger <T> {
     private T container;
     private ArrayList newArrayList = new ArrayList();
 
-    public PlaceChanger (T[] arr) {
-        this.arr = arr;
+    public PlaceChanger () {
+
     }
 
     // Задание 1
@@ -29,6 +29,8 @@ public class PlaceChanger <T> {
         newArrayList.add(Arrays.asList(arr));
         return newArrayList;
     }
+
+
 
 
 }
