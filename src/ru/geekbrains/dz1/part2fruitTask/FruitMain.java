@@ -4,8 +4,11 @@ public class FruitMain {
     public static void main(String[] args) {
 
           Apple apple = new Apple();
-          Box box = new Box();
+          Orange orange = new Orange();
+          Box <Apple> box = new Box();
           box.putFruit( apple );
+
+
           System.out.println(box.getWeight());
     }
 }

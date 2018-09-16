@@ -5,12 +5,19 @@ import java.util.ArrayList;
 
 public class Box <T extends Fruit> {
     ArrayList<T> boxArrayList = new ArrayList<>();
-    Float boxWeight = 0f;
+    Float boxWeight;
     boolean comparing;
+
+//конструктор
+    public Box  (){
+        boxWeight = 0f;
+    }
+
 
 
 //положить фрукт в коробку (Сразу изменим её вес)
-    public void putFruit(T fruit) {
+        public void putFruit(T fruit) {
+
         boxArrayList.add(fruit);
         boxWeight+=fruit.getFruitWeight();
     }
