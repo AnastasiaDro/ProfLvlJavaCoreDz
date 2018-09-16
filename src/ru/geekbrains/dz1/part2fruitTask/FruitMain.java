@@ -1,5 +1,7 @@
 package ru.geekbrains.dz1.part2fruitTask;
 
+import java.util.ArrayList;
+
 public class FruitMain {
     public static void main(String[] args) {
 
@@ -10,5 +12,12 @@ public class FruitMain {
 
 
           System.out.println(box.getWeight());
+
+          //проверяем свойства аррэйлиста
+        ArrayList arr = new ArrayList(  );
+        arr.add("Строка");
+        arr.add( 11f );
+
+
     }
 }
