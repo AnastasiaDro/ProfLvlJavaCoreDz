@@ -1,7 +1,11 @@
 package ru.geekbrains.dz1.part2fruitTask;
 
 public class Fruit {
-    private float weight;
+    float weight;
+
+    public Fruit() {
+
+    }
 
     public float getFruitWeight() {
         return weight;
