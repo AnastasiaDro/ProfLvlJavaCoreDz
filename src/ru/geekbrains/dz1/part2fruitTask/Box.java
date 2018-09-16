@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Box <T extends Fruit> {
     ArrayList<T> boxArrayList = new ArrayList<>();
     Float boxWeight;
+    boolean comparing;
 
 
 //положить фрукт в коробку (Сразу изменим её вес)
@@ -19,7 +20,15 @@ public class Box <T extends Fruit> {
         return boxWeight;
     }
 
-
+//сравнить вес коробок
+    public boolean compare(Box box2) {
+        if (this.getWeight() == box2.getWeight()) {
+            comparing = true;
+        } else {
+            comparing = false;
+        }
+        return comparing;
+    }
 
 
 
