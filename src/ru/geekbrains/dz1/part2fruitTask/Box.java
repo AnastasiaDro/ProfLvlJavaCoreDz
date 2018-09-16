@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Box <T extends Fruit> {
     ArrayList<T> boxArrayList = new ArrayList<>();
-    Float boxWeight;
+    Float boxWeight = 0f;
     boolean comparing;
 
 
