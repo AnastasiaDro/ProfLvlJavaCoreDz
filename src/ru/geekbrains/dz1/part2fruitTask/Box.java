@@ -37,7 +37,9 @@ public class Box <T extends Fruit> {
                     boxWeight += fruit.getFruitWeight();
                 }
             } catch (FruitAddingException e) {
-                System.out.println("В этой коробке фрукты другого типа! Нельзя положить " + fruit.getClass().getName());
+                int pointIndex = fruit.getClass().getName().lastIndexOf( "." )+1;
+                String fruitName = fruit.getClass().getName().substring( pointIndex );
+                System.out.println("В этой коробке фрукты другого типа! Нельзя положить " + fruitName);
             }
         }
 //узнать вес коробки

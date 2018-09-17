@@ -8,7 +8,7 @@ public class FruitAddingException extends Exception {
     }
 
     public String toString() {
-        return "FruitAddngException[" + fruit + "]";
+        return "FruitAddingException[" + fruit + "]";
     }
 
 }
