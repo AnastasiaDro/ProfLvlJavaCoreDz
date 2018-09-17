@@ -49,6 +49,10 @@ public class Box <T extends Fruit> {
 
 // метод убрать фрукт из коробки
         public ArrayList <T> removeFruit(int howMany){
+        if (this.boxArrayList.size() < howMany) {
+            throw new ArrayIndexOutOfBoundsException
+        }
+
         try {
             int index = boxArrayList.size()-1;
             for (int i = 0; i < howMany; i++) {
