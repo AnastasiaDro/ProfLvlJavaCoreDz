@@ -17,14 +17,27 @@ public class Box <T extends Fruit> {
 
 
 //положить фрукт в коробку (Сразу изменим её вес)
-        public void putFruit(T fruit) {
-
-        //здесь можно сделать исключение не тот вес
-            if (boxArrayList.isEmpty()) {
-                boxArrayList.add( fruit );
-                boxWeight += fruit.getFruitWeight();
-            } else {
-
+        public void putFruit(T fruit) throws FruitAddingException {
+//            if (boxArrayList.isEmpty()) {
+//                    boxArrayList.add( fruit );
+//                    boxWeight += fruit.getFruitWeight();
+//            } else {
+//                if (boxArrayList.get(0).getClass().getName() != fruit.getClass().getName()) {
+//                    throw new FruitAddingException( fruit );
+//                } else {
+//                    boxArrayList.add( fruit );
+//                }
+//
+//            }
+            try {
+                if (!boxArrayList.isEmpty() && boxArrayList.get( 0 ).getClass().getName() != fruit.getClass().getName()) {
+                    throw new FruitAddingException ( fruit );
+                } else {
+                    boxArrayList.add( fruit );
+                    boxWeight += fruit.getFruitWeight();
+                }
+            } catch (FruitAddingException e) {
+                System.out.println("В этой коробке фрукты другого типа! Нельзя положить " + fruit.getClass().getName());
             }
         }
 //узнать вес коробки
