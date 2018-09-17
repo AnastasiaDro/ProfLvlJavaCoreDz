@@ -50,6 +50,7 @@ public class Box <T extends Fruit> {
     public ArrayList <T> fruitShifting(Box box2) {
 
 
+    return  boxArrayList;
     }
 
 
