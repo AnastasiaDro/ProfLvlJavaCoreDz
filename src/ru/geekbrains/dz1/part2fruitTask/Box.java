@@ -50,12 +50,15 @@ public class Box <T extends Fruit> {
 // метод убрать фрукт из коробки
         public ArrayList <T> removeFruit(int howMany){
         try {
+            int index = boxArrayList.size()-1;
             for (int i = 0; i < howMany; i++) {
                 //удаляем элемент с последним индексом
-                this.boxArrayList.remove(boxArrayList.size() - 1);
+                boxWeight -= this.boxArrayList.get(index).getFruitWeight();
+                this.boxArrayList.remove(index - i);
             }
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("В коробке нет так много фруктов!");
+
             System.out.println(boxWeight);
                     return boxArrayList;
                 }
@@ -65,7 +68,9 @@ public class Box <T extends Fruit> {
         public ArrayList <T> removeFruit(){
         //удаляем элемент с последним индексом
             try {
-                this.boxArrayList.remove(boxArrayList.size() - 1);
+                int index = boxArrayList.size()-1;
+                boxWeight -= this.boxArrayList.get(index).getFruitWeight();
+                this.boxArrayList.remove(index - 1);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("В коробке нет фруктов!");
             }
@@ -73,11 +78,13 @@ public class Box <T extends Fruit> {
     }
 
 // метод пересыпания фруктов из коробки в коробку
-    public ArrayList <T> sendFruit(Box <T> box2, int howMany) throws FruitAddingException {
-        this.removeFruit(howMany);
+    //не могу передать в метод переменную, которая его вызвала
+    public ArrayList sendFruit(Box <T> box, Box <T> box2, int howMany) throws FruitAddingException {
+       // System.out.println(box.boxArrayList.get(0).getClass().getName());
         for (int i = 0; i < howMany; i++) {
-            box2.putFruit(this.boxArrayList.get(0));
+        box2.putFruit(box.boxArrayList.get(0));
         }
+        box.removeFruit(howMany);
         return box2.boxArrayList;
     }
 
