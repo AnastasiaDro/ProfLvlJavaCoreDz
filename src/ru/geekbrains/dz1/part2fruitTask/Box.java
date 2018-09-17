@@ -14,7 +14,7 @@ public class Box <T extends Fruit> {
         boxArrayList = new ArrayList<>();
     }
 
-//положить фрукт в коробку, перегруженный метод на случай "положить сразу несколько фруктов" (Сразу изменим её вес)
+//положить фрукт в коробку(Сразу изменим её вес)
     public void putFruit(T fruit) throws FruitAddingException {
         try {
             if (!boxArrayList.isEmpty() && boxArrayList.get( 0 ).getClass().getName() != fruit.getClass().getName()) {
@@ -63,7 +63,24 @@ public class Box <T extends Fruit> {
         return comparing;
     }
 
-    // метод убрать фрукт из коробки
+
+    // метод убрать фрукт из коробки, когда нужно удалить только 1
+    public ArrayList<T> removeFruit() {
+        //удаляем элемент с последним индексом
+        try {
+            if (this.boxArrayList.isEmpty()) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            int index = boxArrayList.size() - 1;
+            boxWeight -= this.boxArrayList.get( index ).getFruitWeight();
+            this.boxArrayList.remove( index );
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println( "В коробке нет фруктов!" );
+        }
+        return this.boxArrayList;
+    }
+
+    // перегруженный метод убрать фрукт из коробки, когда нужно удалить несколько
     public ArrayList<T> removeFruit(int howMany) {
         try {
             if (this.boxArrayList.size() < howMany) {
@@ -74,7 +91,7 @@ public class Box <T extends Fruit> {
                 //удаляем элемент с последним индексом
                 index = boxArrayList.size() - 1;
                 boxWeight -= this.boxArrayList.get( index ).getFruitWeight();
-                this.boxArrayList.remove( index);
+                this.boxArrayList.remove(index);
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println( "В коробке нет так много фруктов!" );
@@ -85,21 +102,7 @@ public class Box <T extends Fruit> {
         return boxArrayList;
     }
 
-    // перегрузим метод убрать фрукт из коробки, когда нужно удалить только 1
-    public ArrayList<T> removeFruit() {
-        //удаляем элемент с последним индексом
-        try {
-            if (this.boxArrayList.isEmpty()) {
-                throw new ArrayIndexOutOfBoundsException();
-            }
-            int index = boxArrayList.size() - 1;
-            boxWeight -= this.boxArrayList.get( index ).getFruitWeight();
-            this.boxArrayList.remove( index - 1 );
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println( "В коробке нет фруктов!" );
-        }
-        return this.boxArrayList;
-    }
+
 
     // метод пересыпания фруктов из коробки в коробку
     //не могу передать в метод переменную, которая его вызвала
