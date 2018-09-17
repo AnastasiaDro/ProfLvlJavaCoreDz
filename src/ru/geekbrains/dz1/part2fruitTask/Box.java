@@ -63,9 +63,15 @@ public class Box <T extends Fruit> {
                 //удаляем элемент с последним индексом
                 box.boxArrayList.remove(boxArrayList.size()-1);
             }
-
         return boxArrayList;
         }
+// перегрузим метод убрать фрукт из коробки, когда нужно удалить только 1
+        public ArrayList <T> fruitRemove(Box box){
+        //удаляем элемент с последним индексом
+        box.boxArrayList.remove(boxArrayList.size()-1);
+    return boxArrayList;
+    }
+
 
 
 
