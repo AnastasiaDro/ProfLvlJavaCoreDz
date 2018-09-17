@@ -103,19 +103,19 @@ public class Box <T extends Fruit> {
 
     // метод пересыпания фруктов из коробки в коробку
     //не могу передать в метод переменную, которая его вызвала
-    public ArrayList sendFruit(Box<T> box, Box<T> box2, int howMany) throws FruitAddingException, IndexOutOfBoundsException {
+    public ArrayList sendFruit(Box<T> box2, int howMany) throws FruitAddingException, IndexOutOfBoundsException {
         //костыль
         int firstBox2size = box2.boxArrayList.size();
 
         try {
-            if (box.boxArrayList.size()<howMany) {
+            if (this.boxArrayList.size()<howMany) {
                 throw new IndexOutOfBoundsException();
             } else {
-                box2.putFruit( box.boxArrayList.get( 0 ), howMany );
+                box2.putFruit( this.boxArrayList.get( 0 ), howMany );
                 //результат костыля. Если исключение не вылезло и изменилось число фруктов во второй коробке, то удаляем из первой
                 // если нет - не удаляем
                 if (box2.boxArrayList.size() > firstBox2size) {
-                    box.removeFruit( howMany );
+                    this.removeFruit( howMany );
                 }
             }
         } catch (IndexOutOfBoundsException e) {
