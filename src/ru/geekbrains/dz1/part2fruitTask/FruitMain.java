@@ -11,16 +11,16 @@ public class FruitMain {
           Box box2 = new Box();
          box.putFruit( apple );
 
-          box.putFruit( orange );
-        box.putFruit(apple);
+          box2.putFruit( orange );
+       box.putFruit(apple);
 
 
         System.out.println("Вес первой коробки: " + box.getWeight());
 
-           box.removeFruit(1);
+     //      box.removeFruit(1);
 
         System.out.println("пересыпем фрукты");
-            box.sendFruit(box,box2, 1);
+            box.sendFruit(box,box2, 2);
         System.out.println("Вес первой коробки: " + box.getWeight());
         System.out.println("Вес второй коробки: " + box2.getWeight());
 
