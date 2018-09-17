@@ -12,12 +12,3 @@ public class FruitAddingException extends Exception {
     }
 
 }
-
-
-//здесь можно сделать исключение не тот фрукт
-//            if (boxArrayList.isEmpty()) {
-//                    boxArrayList.add( fruit );
-//                    boxWeight += fruit.getFruitWeight();
-//                    } else {
-//
-//                    }
