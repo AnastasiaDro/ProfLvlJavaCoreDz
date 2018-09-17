@@ -14,16 +14,32 @@ public class Box <T extends Fruit> {
         boxArrayList = new ArrayList<>();
     }
 
-
-    //положить фрукт в коробку (Сразу изменим её вес)
+//положить фрукт в коробку, перегруженный метод на случай "положить сразу несколько фруктов" (Сразу изменим её вес)
     public void putFruit(T fruit) throws FruitAddingException {
-
         try {
             if (!boxArrayList.isEmpty() && boxArrayList.get( 0 ).getClass().getName() != fruit.getClass().getName()) {
                 throw new FruitAddingException( fruit );
             } else {
-                boxArrayList.add( fruit );
-                boxWeight += fruit.getFruitWeight();
+                    boxArrayList.add( fruit );
+                    boxWeight += fruit.getFruitWeight();
+            }
+        } catch (FruitAddingException e) {
+            int pointIndex = fruit.getClass().getName().lastIndexOf( "." ) + 1;
+            String fruitName = fruit.getClass().getName().substring( pointIndex );
+            System.out.println( "В этой коробке фрукты другого типа! Нельзя положить " + fruitName );
+        }
+    }
+
+//положить фрукт в коробку, перегруженный метод на случай "положить сразу несколько фруктов"
+    public void putFruit(T fruit, int howMany) throws FruitAddingException {
+        try {
+            if (!boxArrayList.isEmpty() && boxArrayList.get( 0 ).getClass().getName() != fruit.getClass().getName()) {
+                throw new FruitAddingException( fruit );
+            } else {
+                for (int i = 0; i < howMany; i++) {
+                    boxArrayList.add( fruit );
+                    boxWeight += fruit.getFruitWeight();
+                }
             }
         } catch (FruitAddingException e) {
             int pointIndex = fruit.getClass().getName().lastIndexOf( "." ) + 1;
@@ -92,9 +108,7 @@ public class Box <T extends Fruit> {
             if (box.boxArrayList.size()<howMany) {
                 throw new IndexOutOfBoundsException();
             } else {
-                for (int i = 0; i < howMany; i++) {
-                    box2.putFruit( box.boxArrayList.get( 0 ) );
-                }
+                    box2.putFruit( box.boxArrayList.get( 0 ), howMany);
                 box.removeFruit( howMany );
             }
         } catch (IndexOutOfBoundsException e) {

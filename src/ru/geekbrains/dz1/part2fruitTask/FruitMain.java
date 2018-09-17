@@ -9,9 +9,9 @@ public class FruitMain {
           Orange orange = new Orange();
           Box  box = new Box();
           Box box2 = new Box();
-         box.putFruit( apple );
+         box.putFruit( apple, 2);
 
-          box2.putFruit( orange );
+          box2.putFruit( orange);
        box.putFruit(apple);
 
 
@@ -20,7 +20,7 @@ public class FruitMain {
      //      box.removeFruit(1);
 
         System.out.println("пересыпем фрукты");
-            box.sendFruit(box,box2, 2);
+            box.sendFruit(box,box2, 2 );
         System.out.println("Вес первой коробки: " + box.getWeight());
         System.out.println("Вес второй коробки: " + box2.getWeight());
 
