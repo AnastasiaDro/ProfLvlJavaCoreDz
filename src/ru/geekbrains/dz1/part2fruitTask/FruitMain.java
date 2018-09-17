@@ -8,12 +8,14 @@ public class FruitMain {
           Apple apple = new Apple();
           Orange orange = new Orange();
           Box  box = new Box();
-          box.putFruit( apple );
+         box.putFruit( apple );
+
           box.putFruit( orange );
+        box.putFruit(apple);
 
 
           System.out.println(box.getWeight());
-
+            box.removeFruit(box, 3);
 
 
 

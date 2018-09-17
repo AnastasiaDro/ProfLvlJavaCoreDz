@@ -58,17 +58,27 @@ public class Box <T extends Fruit> {
     }
 
 // метод убрать фрукт из коробки
-        public ArrayList <T> fruitRemove(Box box, int howMany){
+        public ArrayList <T> removeFruit(Box box, int howMany){
+        try {
             for (int i = 0; i < howMany; i++) {
                 //удаляем элемент с последним индексом
-                box.boxArrayList.remove(boxArrayList.size()-1);
+                box.boxArrayList.remove(boxArrayList.size() - 1);
             }
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("В коробке нет так много фруктов!");
+            System.out.println(boxWeight);
+                    return boxArrayList;
+                }
         return boxArrayList;
         }
 // перегрузим метод убрать фрукт из коробки, когда нужно удалить только 1
-        public ArrayList <T> fruitRemove(Box box){
+        public ArrayList <T> removeFruit(Box box){
         //удаляем элемент с последним индексом
-        box.boxArrayList.remove(boxArrayList.size()-1);
+            try {
+                box.boxArrayList.remove(boxArrayList.size() - 1);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("В коробке нет фруктов!");
+            }
     return boxArrayList;
     }
 
