@@ -57,6 +57,16 @@ public class Box <T extends Fruit> {
         return comparing;
     }
 
+// метод убрать фрукт из коробки
+        public ArrayList <T> fruitRemove(Box box, int howMany){
+            for (int i = 0; i < howMany; i++) {
+                //удаляем элемент с последним индексом
+                box.boxArrayList.remove(boxArrayList.size()-1);
+            }
+
+        return boxArrayList;
+        }
+
 
 
 }
