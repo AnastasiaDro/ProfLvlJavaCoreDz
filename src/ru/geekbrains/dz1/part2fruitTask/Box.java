@@ -69,11 +69,12 @@ public class Box <T extends Fruit> {
             if (this.boxArrayList.size() < howMany) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            int index = boxArrayList.size() - 1;
+            int index;
             for (int i = 0; i < howMany; i++) {
                 //удаляем элемент с последним индексом
+                index = boxArrayList.size() - 1;
                 boxWeight -= this.boxArrayList.get( index ).getFruitWeight();
-                this.boxArrayList.remove( index - i );
+                this.boxArrayList.remove( index);
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println( "В коробке нет так много фруктов!" );
@@ -103,13 +104,19 @@ public class Box <T extends Fruit> {
     // метод пересыпания фруктов из коробки в коробку
     //не могу передать в метод переменную, которая его вызвала
     public ArrayList sendFruit(Box<T> box, Box<T> box2, int howMany) throws FruitAddingException, IndexOutOfBoundsException {
-        // System.out.println(box.boxArrayList.get(0).getClass().getName());
+        //костыль
+        int firstBox2size = box2.boxArrayList.size();
+
         try {
             if (box.boxArrayList.size()<howMany) {
                 throw new IndexOutOfBoundsException();
             } else {
-                    box2.putFruit( box.boxArrayList.get( 0 ), howMany);
-                box.removeFruit( howMany );
+                box2.putFruit( box.boxArrayList.get( 0 ), howMany );
+                //результат костыля. Если исключение не вылезло и изменилось число фруктов во второй коробке, то удаляем из первой
+                // если нет - не удаляем
+                if (box2.boxArrayList.size() > firstBox2size) {
+                    box.removeFruit( howMany );
+                }
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println( "В коробке нет так много фруктов! Пересыпка отменена" );
