@@ -18,6 +18,7 @@ public class Box <T extends Fruit> {
 
 //положить фрукт в коробку (Сразу изменим её вес)
         public void putFruit(T fruit) throws FruitAddingException {
+
             try {
                 if (!boxArrayList.isEmpty() && boxArrayList.get( 0 ).getClass().getName() != fruit.getClass().getName()) {
                     throw new FruitAddingException ( fruit );
@@ -46,14 +47,49 @@ public class Box <T extends Fruit> {
         return comparing;
     }
 
-// Пересыпать фрукты из коробки в коробку.
-    public ArrayList <T> fruitShifting(Box box2) {
+// метод убрать фрукт из коробки
+        public ArrayList <T> removeFruit(int howMany){
+        if (this.boxArrayList.size() < howMany) {
+            throw new ArrayIndexOutOfBoundsException
+        }
 
+        try {
+            int index = boxArrayList.size()-1;
+            for (int i = 0; i < howMany; i++) {
+                //удаляем элемент с последним индексом
+                boxWeight -= this.boxArrayList.get(index).getFruitWeight();
+                this.boxArrayList.remove(index - i);
+            }
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("В коробке нет так много фруктов!");
 
-    return  boxArrayList;
+            System.out.println(boxWeight);
+                    return boxArrayList;
+                }
+        return boxArrayList;
+        }
+// перегрузим метод убрать фрукт из коробки, когда нужно удалить только 1
+        public ArrayList <T> removeFruit(){
+        //удаляем элемент с последним индексом
+            try {
+                int index = boxArrayList.size()-1;
+                boxWeight -= this.boxArrayList.get(index).getFruitWeight();
+                this.boxArrayList.remove(index - 1);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("В коробке нет фруктов!");
+            }
+    return this.boxArrayList;
     }
 
-
-
+// метод пересыпания фруктов из коробки в коробку
+    //не могу передать в метод переменную, которая его вызвала
+    public ArrayList sendFruit(Box <T> box, Box <T> box2, int howMany) throws FruitAddingException {
+       // System.out.println(box.boxArrayList.get(0).getClass().getName());
+        for (int i = 0; i < howMany; i++) {
+        box2.putFruit(box.boxArrayList.get(0));
+        }
+        box.removeFruit(howMany);
+        return box2.boxArrayList;
+    }
 
 }
