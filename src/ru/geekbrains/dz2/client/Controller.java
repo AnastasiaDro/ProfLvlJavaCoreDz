@@ -4,10 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import ru.geekbrains.dz2.server.AuthService;
 
@@ -17,6 +14,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
 import java.sql.*;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -124,16 +122,33 @@ public class Controller implements Initializable {
 
     //метод смены ника
     public void changeNick(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        msgField.clear();
-        textArea.setText("Введите желаемый ник в поле ввода \n" );
-        msgField.requestFocus();
+//        msgField.clear();
+//        textArea.setText("Введите желаемый ник в поле ввода \n" );
+//        msgField.requestFocus();
 
+        //окно ввода нового ника
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Смена ника");
+        dialog.setHeaderText("Введите желаемый ник");
+        dialog.setContentText("Желаемый ник:");
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(newNick -> System.out.println("Новый ник: " + newNick));
+
+        //коннект к базе
         Class.forName("org.sqlite.JDBC");
         Connection connection = DriverManager.getConnection("jdbc:sqlite:ChatUsers.db");
         Statement stmt = connection.createStatement();
+//изменить данные таблицы
+        ResultSet rs = stmt.executeQuery("UPDATE users SET nick = '" + result + "'  WHERE Nick = '" + );
 
-        ResultSet rs = stmt.executeQuery("UPDATE users SET nick=")
-        AuthService.disconnect();
+
+       //дисконнект
+        try {
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
