@@ -9,12 +9,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import ru.geekbrains.dz2.server.AuthService;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -120,6 +122,16 @@ public class Controller implements Initializable {
         }
     }
 
+    public void changeNick(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        msgField.clear();
+        textArea.setText("Введите желаемый ник в поле ввода \n" );
+        msgField.requestFocus();
+        AuthService.connect();
+
+        AuthService.disconnect();
+
+    }
+
     public void showAlert(String msg){
         Platform.runLater( new Runnable() {
             @Override
@@ -132,4 +144,6 @@ public class Controller implements Initializable {
             }
         });
     }
+
+
 }
