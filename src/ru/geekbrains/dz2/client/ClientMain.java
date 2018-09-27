@@ -10,9 +10,6 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class ClientMain extends Application {
 
-
-
-
     public void start(Stage primaryStage) throws Exception {
         Parent root = load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle( "JavaChat" );
