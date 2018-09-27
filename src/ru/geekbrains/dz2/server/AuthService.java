@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class AuthService {
 
-    private static Connection connection;
-    private static Statement stmt;
+    private Connection connection;
+    private Statement stmt;
 
-    public static void connect() throws ClassNotFoundException, SQLException {
+    public void connect() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:ChatUsers.db");
         stmt = connection.createStatement();
@@ -27,7 +27,7 @@ public class AuthService {
 
 
 
-    public static void disconnect(){
+    public void disconnect(){
         try {
             stmt.close();
             connection.close();

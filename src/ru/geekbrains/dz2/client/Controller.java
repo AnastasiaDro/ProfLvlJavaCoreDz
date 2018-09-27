@@ -16,7 +16,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -122,12 +122,17 @@ public class Controller implements Initializable {
         }
     }
 
+    //метод смены ника
     public void changeNick(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         msgField.clear();
         textArea.setText("Введите желаемый ник в поле ввода \n" );
         msgField.requestFocus();
-        AuthService.connect();
 
+        Class.forName("org.sqlite.JDBC");
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:ChatUsers.db");
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs = stmt.executeQuery("UPDATE users SET nick=")
         AuthService.disconnect();
 
     }
