@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class ClientHandler {
     private Server server;
@@ -33,10 +34,6 @@ public class ClientHandler {
                                 nick = newNick;
                                 sendMsg("/authok");
                                 server.subscribe(this);
-                                //новая строка
-                                //AuthService.disconnect();
-
-
                                 break;
                             } else {
                                 sendMsg("Неверный логин/пароль");
@@ -44,6 +41,13 @@ public class ClientHandler {
                         }
                     }
                     while (true) {
+                        //новая строка
+                        try {
+                            AuthService.stmt.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+// конец
 
                         String msg = in.readUTF();
                         System.out.println(nick + ": " + msg);

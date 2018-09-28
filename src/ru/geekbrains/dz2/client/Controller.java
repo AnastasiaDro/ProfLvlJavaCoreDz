@@ -137,10 +137,10 @@ public class Controller implements Initializable {
         //коннект к базе
         Class.forName("org.sqlite.JDBC");
         Connection connection = DriverManager.getConnection("jdbc:sqlite:ChatUsers.db");
-        PreparedStatement stmtChanging = connection.prepareStatement( "UPDATE users SET nick = '" + result + "'  WHERE Nick = ?" );
+        PreparedStatement stmtChanging = connection.prepareStatement( "UPDATE users SET nick = '" + result + "'  WHERE login = ?" );
         //
 //изменить данные таблицы
-        stmtChanging.setString( 1, "blbla" );
+        stmtChanging.setString( 1, "user2" );
         int rs = stmtChanging.executeUpdate();
 
 

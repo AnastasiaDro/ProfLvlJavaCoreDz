@@ -5,7 +5,7 @@ import java.sql.*;
 public class AuthService {
 
     private Connection connection;
-    private Statement stmt;
+   static Statement stmt;
 
 
 
