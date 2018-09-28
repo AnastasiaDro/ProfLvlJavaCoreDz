@@ -140,7 +140,8 @@ public class Controller implements Initializable {
         PreparedStatement stmtChanging = connection.prepareStatement( "UPDATE users SET nick = '" + result + "'  WHERE Nick = ?" );
         //
 //изменить данные таблицы
-        ResultSet rs = stmtChanging.executeQuery();
+        stmtChanging.setString( 1, "blbla" );
+        int rs = stmtChanging.executeUpdate();
 
 
        //дисконнект

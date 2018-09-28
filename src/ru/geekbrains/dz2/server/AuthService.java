@@ -7,6 +7,8 @@ public class AuthService {
     private Connection connection;
     private Statement stmt;
 
+
+
     public void connect() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:ChatUsers.db");
@@ -16,6 +18,8 @@ public class AuthService {
     public String getNickByLoginAndPass(String login, String pass){
         try {
             ResultSet rs = stmt.executeQuery("SELECT nick FROM users WHERE login = '" + login + "' AND password = '" + pass + "';");
+            //новая строка
+
             while (rs.next()){
                 return rs.getString("nick");
             }
@@ -24,8 +28,6 @@ public class AuthService {
         }
         return null;
     }
-
-
 
     public void disconnect(){
         try {

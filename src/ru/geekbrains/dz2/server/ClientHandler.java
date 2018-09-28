@@ -33,6 +33,10 @@ public class ClientHandler {
                                 nick = newNick;
                                 sendMsg("/authok");
                                 server.subscribe(this);
+                                //новая строка
+                                //AuthService.disconnect();
+
+
                                 break;
                             } else {
                                 sendMsg("Неверный логин/пароль");
@@ -40,6 +44,7 @@ public class ClientHandler {
                         }
                     }
                     while (true) {
+
                         String msg = in.readUTF();
                         System.out.println(nick + ": " + msg);
                         if (msg.equals("/end")) break;
