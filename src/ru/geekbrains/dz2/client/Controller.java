@@ -40,6 +40,7 @@ public class Controller implements Initializable {
     final int SERVER_PORT = 8189;
 
     String newNickforDB;
+    String login;
 
     private boolean authhorized;
 
@@ -73,6 +74,10 @@ public class Controller implements Initializable {
                             String s = in.readUTF();
                             if (s.equals("/authok")){
                                 setAuthhorized(true);
+                                //новая строка, упереть тут логин
+
+
+
                                 break;
                             }
                             textArea.appendText(s + "\n");
@@ -105,6 +110,9 @@ public class Controller implements Initializable {
     public void sendAuthMsg(){
         // "/auth login pass"
         try {
+            //новая строка
+            login = loginField.getText();
+            System.out.println("Логин из поля ввода "+login);
             out.writeUTF("/auth " + loginField.getText() + " " + passField.getText());
             loginField.clear();
             passField.clear();
@@ -141,7 +149,7 @@ public class Controller implements Initializable {
         int indexBgn = newNickforDB.lastIndexOf( "[" );
         int indexEnd = newNickforDB.lastIndexOf( "]" );
 
-         newNickforDB=newNickforDB.substring( indexBgn-1,indexEnd-1 );
+         newNickforDB=newNickforDB.substring( indexBgn+1,indexEnd-1 );
 
         //коннект к базе
         Class.forName("org.sqlite.JDBC");
@@ -150,9 +158,11 @@ public class Controller implements Initializable {
         //
 
 //изменить данные таблицы
-        stmtChanging.setString( 1, "user2" );
+        System.out.println("Логин перед отправлением в statement "+ login);
+        stmtChanging.setString( 1, login);
         int rs = stmtChanging.executeUpdate();
-        ClientHandler.setNick(newNickforDB);
+
+        //ClientHandler.setNick(newNickforDB);
 
        //дисконнект
         try {
