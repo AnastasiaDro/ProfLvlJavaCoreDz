@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ArrayChanger <T> {
     //переменная для записи элемента
     // private T[] arr;
-    private T container;
+
     private ArrayList newArrayList = new ArrayList();
 
     public ArrayChanger () {
@@ -16,6 +16,7 @@ public class ArrayChanger <T> {
     // Задание 1
     // сам метод смены мест ПО ИНДЕКСУ
     public  T[] placeChangerByIndex (T[] arr, int firstIndex, int secondIndex) {
+        T container;
         container = arr[firstIndex];
         arr[firstIndex] = arr[secondIndex];
         arr[secondIndex] = container;
