@@ -1,5 +1,7 @@
 package ru.geekbrains.dz2.server;
 
+import ru.geekbrains.dz2.client.Controller;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,10 +13,14 @@ public class ClientHandler {
     private Socket socket;
     private DataInputStream in;
     private DataOutputStream out;
-    private String nick;
+    private static String nick;
 
     public String getNick() {
         return nick;
+    }
+
+    public static void setNick(String newNick){
+        nick = newNick;
     }
 
     public ClientHandler(Server server, Socket socket) {
@@ -31,6 +37,7 @@ public class ClientHandler {
                             String[] data = msg.split("\\s");
                             String newNick = server.getAuthService().getNickByLoginAndPass(data[1],data[2]);
                             if (newNick !=null) {
+
                                 nick = newNick;
                                 sendMsg("/authok");
                                 server.subscribe(this);
@@ -50,6 +57,10 @@ public class ClientHandler {
 // конец
 
                         String msg = in.readUTF();
+
+
+                        //здесь надо поменять ник
+                        getNick();
                         System.out.println(nick + ": " + msg);
                         if (msg.equals("/end")) break;
                         server.broadcastMsg(nick  + ": " + msg);

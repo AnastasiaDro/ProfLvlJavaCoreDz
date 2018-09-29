@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import ru.geekbrains.dz2.server.AuthService;
+import ru.geekbrains.dz2.server.ClientHandler;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -37,6 +38,8 @@ public class Controller implements Initializable {
 
     final String SERVER_IP = "localhost";
     final int SERVER_PORT = 8189;
+
+    String newNickforDB;
 
     private boolean authhorized;
 
@@ -134,15 +137,22 @@ public class Controller implements Initializable {
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(newNick -> System.out.println("Новый ник: " + newNick));
 
+        newNickforDB = result.toString();
+        int indexBgn = newNickforDB.lastIndexOf( "[" );
+        int indexEnd = newNickforDB.lastIndexOf( "]" );
+
+         newNickforDB=newNickforDB.substring( indexBgn-1,indexEnd-1 );
+
         //коннект к базе
         Class.forName("org.sqlite.JDBC");
         Connection connection = DriverManager.getConnection("jdbc:sqlite:ChatUsers.db");
-        PreparedStatement stmtChanging = connection.prepareStatement( "UPDATE users SET nick = '" + result + "'  WHERE login = ?" );
+        PreparedStatement stmtChanging = connection.prepareStatement( "UPDATE users SET nick = '" + newNickforDB + "'  WHERE login = ?" );
         //
+
 //изменить данные таблицы
         stmtChanging.setString( 1, "user2" );
         int rs = stmtChanging.executeUpdate();
-
+        ClientHandler.setNick(newNickforDB);
 
        //дисконнект
         try {
@@ -151,6 +161,9 @@ public class Controller implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+
 
     }
 
