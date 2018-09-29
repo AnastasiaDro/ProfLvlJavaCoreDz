@@ -60,7 +60,7 @@ public class ClientHandler {
 
 
                         //здесь надо поменять ник
-                        getNick();
+
                         System.out.println(nick + ": " + msg);
                         if (msg.equals("/end")) break;
                         server.broadcastMsg(nick  + ": " + msg);

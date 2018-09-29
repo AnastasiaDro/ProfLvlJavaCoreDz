@@ -140,7 +140,7 @@ public class Controller implements Initializable {
         //окно ввода нового ника
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Смена ника");
-        dialog.setHeaderText("Введите желаемый ник");
+        dialog.setHeaderText("После смены - необходимо перезапустить чат");
         dialog.setContentText("Желаемый ник:");
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(newNick -> System.out.println("Новый ник: " + newNick));
@@ -149,7 +149,7 @@ public class Controller implements Initializable {
         int indexBgn = newNickforDB.lastIndexOf( "[" );
         int indexEnd = newNickforDB.lastIndexOf( "]" );
 
-         newNickforDB=newNickforDB.substring( indexBgn+1,indexEnd-1 );
+         newNickforDB=newNickforDB.substring( indexBgn+1,indexEnd);
 
         //коннект к базе
         Class.forName("org.sqlite.JDBC");
@@ -162,9 +162,9 @@ public class Controller implements Initializable {
         stmtChanging.setString( 1, login);
         int rs = stmtChanging.executeUpdate();
 
-        //ClientHandler.setNick(newNickforDB);
 
-       //дисконнект
+        //конец изменений
+        //дисконнект
         try {
             stmtChanging.close();
             connection.close();
