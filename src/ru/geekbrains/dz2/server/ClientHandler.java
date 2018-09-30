@@ -37,10 +37,11 @@ public class ClientHandler {
                             String[] data = msg.split("\\s");
                             String newNick = server.getAuthService().getNickByLoginAndPass(data[1],data[2]);
                             if (newNick !=null) {
-
                                 nick = newNick;
                                 sendMsg("/authok");
                                 server.subscribe(this);
+                                HistoryReader historyReader = new HistoryReader();
+                                historyReader.readHistory();
                                 break;
                             } else {
                                 sendMsg("Неверный логин/пароль");
@@ -55,6 +56,8 @@ public class ClientHandler {
                             e.printStackTrace();
                         }
 // конец
+
+
 
                         String msg = in.readUTF();
 
