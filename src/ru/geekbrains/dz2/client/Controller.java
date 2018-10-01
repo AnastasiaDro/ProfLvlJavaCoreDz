@@ -79,7 +79,7 @@ public class Controller implements Initializable {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-  //впишем тут запись в историю
+  //Создадим historyWriter
                     HistoryWriter historyWriter = new HistoryWriter();
                     try {
                         while (true) {
@@ -97,7 +97,7 @@ public class Controller implements Initializable {
                         while (true) {
                             String s = in.readUTF();
                             textArea.appendText(s + "\n");
-   //здесь запишем в историю переписки
+   //здесь запишем пришедшее из сервера сообщение в историю переписки
                            historyWriter.writeHistory( s );
 
             //               historyWriter.closeHistoryWriter();
@@ -135,9 +135,7 @@ public class Controller implements Initializable {
     }
 
     public void sendAuthMsg(){
-        // "/auth login pass"
         try {
-            //новая строка
             login = loginField.getText();
             System.out.println("Логин из поля ввода "+login);
             out.writeUTF("/auth " + loginField.getText() + " " + passField.getText());
@@ -188,8 +186,6 @@ public class Controller implements Initializable {
         System.out.println("Логин перед отправлением в statement "+ login);
         stmtChanging.setString( 1, login);
         int rs = stmtChanging.executeUpdate();
-
-
         //конец изменений
         //дисконнект
         try {

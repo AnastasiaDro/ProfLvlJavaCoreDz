@@ -16,7 +16,7 @@ public class HistoryReader {
         br = new BufferedReader( new FileReader( "src\\ru\\geekbrains\\dz2\\client\\history.txt") );
         String str;
 
-        //условие на 100 строк
+//Чтобы вывести только 100 строк, используем массив
 
         while((str = br.readLine()) != null)
             myArr.add( str+"\n" );
