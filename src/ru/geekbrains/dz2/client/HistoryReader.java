@@ -11,6 +11,12 @@ public class HistoryReader {
         try {
         br = new BufferedReader( new FileReader( "src\\ru\\geekbrains\\dz2\\client\\history.txt") );
         String str;
+
+        //условие на 100 строк
+
+
+
+
         while((str = br.readLine()) != null)
             answer += str+"\n";
             answer+="Текущая переписка: \n";
