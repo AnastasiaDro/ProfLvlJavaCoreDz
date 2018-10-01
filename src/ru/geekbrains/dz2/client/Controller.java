@@ -9,10 +9,7 @@ import javafx.scene.layout.HBox;
 import ru.geekbrains.dz2.server.AuthService;
 import ru.geekbrains.dz2.server.ClientHandler;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.net.URL;
 import java.sql.*;
@@ -60,6 +57,8 @@ public class Controller implements Initializable {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            //инициализируем новый хистори райтер
+
 
 
         } else {
@@ -80,6 +79,8 @@ public class Controller implements Initializable {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
+  //впишем тут запись в историю
+                    HistoryWriter historyWriter = new HistoryWriter();
                     try {
                         while (true) {
                             String s = in.readUTF();
@@ -87,23 +88,38 @@ public class Controller implements Initializable {
                                 setAuthhorized(true);
                                 //новая строка, упереть тут логин
 
-
-
                                 break;
                             }
                             textArea.appendText(s + "\n");
+
                         }
 
                         while (true) {
                             String s = in.readUTF();
                             textArea.appendText(s + "\n");
+   //здесь запишем в историю переписки
+                           historyWriter.writeHistory( s );
+
+            //               historyWriter.closeHistoryWriter();
+                           //
+//                            System.out.println("Записали: "+ s+"\n");
+//                            вот так работает:
+//                            BufferedWriter testWriter = new BufferedWriter( new FileWriter( "src\\ru\\geekbrains\\dz2\\client\\history.txt", true ) );
+//                            testWriter.write( s+"\n" );
+//                            testWriter.close();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
+
                         setAuthhorized(false);
+
                         try {
+
+ //закрываю ли я здесь свой FileWriter????
+                            historyWriter.closeHistoryWriter();
                             socket.close();
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
