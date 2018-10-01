@@ -9,7 +9,7 @@ public class FruitMain {
         Box box2 = new Box();
         Box emptyBox = new Box();
         //можем создавать коробку сразу с предопределенным типом
-        Box <Orange> originOrangeBox = new Box<>();
+        Box <Orange> originOrangeBox = new Box();
 
         box.putFruit( apple, 2);
 
