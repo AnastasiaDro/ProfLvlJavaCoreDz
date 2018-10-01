@@ -11,6 +11,7 @@ import ru.geekbrains.dz2.server.ClientHandler;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
@@ -51,6 +52,16 @@ public class Controller implements Initializable {
             msgPanel.setManaged(true);
             authPanel.setVisible(false);
             authPanel.setManaged(false);
+
+            //Чтение истории из файла
+            HistoryReader historyReader = new HistoryReader();
+            try {
+                textArea.setText(historyReader.readHistory());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
         } else {
             msgPanel.setVisible(false);
             msgPanel.setManaged(false);
@@ -171,9 +182,6 @@ public class Controller implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
 
     }
 

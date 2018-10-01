@@ -1,6 +1,6 @@
 package ru.geekbrains.dz2.server;
 
-import ru.geekbrains.dz2.client.Controller;
+import ru.geekbrains.dz2.client.HistoryReader;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -37,11 +37,10 @@ public class ClientHandler {
                             String[] data = msg.split("\\s");
                             String newNick = server.getAuthService().getNickByLoginAndPass(data[1],data[2]);
                             if (newNick !=null) {
+
                                 nick = newNick;
                                 sendMsg("/authok");
                                 server.subscribe(this);
-                                HistoryReader historyReader = new HistoryReader();
-                                historyReader.readHistory();
                                 break;
                             } else {
                                 sendMsg("Неверный логин/пароль");
@@ -57,11 +56,7 @@ public class ClientHandler {
                         }
 // конец
 
-
-
                         String msg = in.readUTF();
-
-
                         //здесь надо поменять ник
 
                         System.out.println(nick + ": " + msg);
