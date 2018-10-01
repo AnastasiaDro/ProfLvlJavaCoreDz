@@ -57,10 +57,6 @@ public class Controller implements Initializable {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            //инициализируем новый хистори райтер
-
-
-
         } else {
             msgPanel.setVisible(false);
             msgPanel.setManaged(false);
