@@ -10,7 +10,7 @@ public class MyLetterThread implements Runnable {
 public MyLetterThread (char letter, int exitNumber) {
     this.letter  = letter;
     this.exitNumber = exitNumber;
-    this.t = new Thread(  );
+    this.t = new Thread(this  );
     t.start();
 }
 
