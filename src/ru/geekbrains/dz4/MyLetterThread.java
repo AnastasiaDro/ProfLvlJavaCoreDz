@@ -1,21 +1,18 @@
 package ru.geekbrains.dz4;
 
-import org.omg.PortableServer.THREAD_POLICY_ID;
-
-import java.util.List;
-
 public class MyLetterThread implements Runnable {
     char letter;
     int exitNumber;
     //число потоков
     int maxNumber = 3;
     //счётчик номера потока
-    int counter = 1;
+    int counter;
     Thread t;
 
     //конструктор
-    public MyLetterThread(char letter, int exitNumber) {
+    public MyLetterThread(char letter, int exitNumber, int counter) {
         this.letter = letter;
+        this.counter = counter;
         this.exitNumber = exitNumber;
         this.t = new Thread( this );
         t.start();
@@ -24,43 +21,38 @@ public class MyLetterThread implements Runnable {
 
     @Override
     public void run() {
-        synchronized (this) {
-            try {
-                while (exitNumber != counter) {
-                    this.wait();
-                }
-                for (int i = 0; i < 5; i++) {
-                    System.out.println( letter );
-                }
+        printLetter();
+    }
 
-                if (counter != maxNumber) {
-                    counter += 1;
-                } else {
-                    counter = 1;
-                }
+    public synchronized int printLetter() {
+     //   for (int i = 0; i < 5; i++) {
 
-            }
 
-//        if (exitNumber == counter ) {
-//            for (int i = 0; i < 5; i++) {
-//                System.out.println( letter );
-//            }
-//
-//                if (counter!= maxNumber) {
-//                    counter += 1;
-//                } else {
-//                    counter = 1;
-//                }
+        print();
+        //}
+//            System.out.println( letter );
+//            if (counter != maxNumber) {
+//                counter += 1;
 //            } else {
-//            while (exitNumber != counter) {
-//                this.wait();
+//                counter = 1;
+//            }
+//            try {
+//                while (exitNumber != counter) {
+//                    this.wait();
+//                }
+//            } catch (InterruptedException e) {
+//                System.out.println( "ошибка в методе run класса" );
 //            }
 //        }
-            //}
-         catch(InterruptedException e){
-            System.out.println( "Поток " + letter + " прерван" );
+//        notifyAll();
+       return counter;
+    }
+
+
+    public synchronized void print() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println( letter );
         }
     }
-}
 
 }
