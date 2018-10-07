@@ -9,6 +9,8 @@ public class MyLetterThread implements Runnable {
     int counter;
     Thread t;
 
+    boolean monitorState = false;
+
     //конструктор
     public MyLetterThread(char letter, int exitNumber, int counter) {
         this.letter = letter;
@@ -21,38 +23,35 @@ public class MyLetterThread implements Runnable {
 
     @Override
     public void run() {
+        if (monitorState != false)
+            notify();
         printLetter();
     }
 
     public synchronized int printLetter() {
-     //   for (int i = 0; i < 5; i++) {
 
+        for (int i = 0; i < 5; i++) {
+            if (counter == exitNumber) {
+                System.out.println(letter);
+                if (counter != maxNumber) {
+                    counter = counter + 1;
+                } else {
+                    counter = 1;
+                }
 
-        print();
-        //}
-//            System.out.println( letter );
-//            if (counter != maxNumber) {
-//                counter += 1;
-//            } else {
-//                counter = 1;
-//            }
-//            try {
-//                while (exitNumber != counter) {
-//                    this.wait();
-//                }
-//            } catch (InterruptedException e) {
-//                System.out.println( "ошибка в методе run класса" );
-//            }
-//        }
-//        notifyAll();
+            } else {
+                try {
+                    monitorState = true;
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
        return counter;
     }
 
 
-    public synchronized void print() {
-        for (int i = 0; i < 5; i++) {
-            System.out.println( letter );
-        }
-    }
 
 }
