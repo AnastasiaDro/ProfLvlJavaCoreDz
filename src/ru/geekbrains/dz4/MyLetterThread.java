@@ -25,7 +25,9 @@ public class MyLetterThread implements Runnable {
 
     @Override
     public void run() {
-            m.printLetter(letter);
+        //пока: counter!=exitNumber поток спит
+            counter = m.printLetter(letter);
+            m.prince();
     }
 
 
