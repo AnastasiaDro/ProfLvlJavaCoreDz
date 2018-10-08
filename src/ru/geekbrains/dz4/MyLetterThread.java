@@ -8,50 +8,28 @@ public class MyLetterThread implements Runnable {
     //счётчик номера потока
     int counter;
     Thread t;
+    Methodist m;
 
     boolean monitorState = false;
 
     //конструктор
-    public MyLetterThread(char letter, int exitNumber, int counter) {
+    public MyLetterThread(char letter, int exitNumber, int counter, Methodist m) {
         this.letter = letter;
         this.counter = counter;
         this.exitNumber = exitNumber;
         this.t = new Thread( this );
         t.start();
+        this.m = m;
     }
 
 
     @Override
     public void run() {
-        if (monitorState != false)
-            notify();
-        printLetter();
+            m.printLetter(letter);
     }
 
-    public synchronized int printLetter() {
 
-        for (int i = 0; i < 5; i++) {
-            if (counter == exitNumber) {
-                System.out.println(letter);
-                if (counter != maxNumber) {
-                    counter = counter + 1;
-                } else {
-                    counter = 1;
-                }
-
-            } else {
-                try {
-                    monitorState = true;
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-       return counter;
-    }
-
+    //блокировка
 
 
 }
