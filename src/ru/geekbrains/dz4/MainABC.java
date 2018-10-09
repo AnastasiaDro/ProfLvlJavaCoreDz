@@ -1,6 +1,7 @@
 package ru.geekbrains.dz4;
 
 public class MainABC {
+    //переключатель, используемый для запуска потока с таким же порядковым номером (exitNumber)
     public static int counter = 1;
     //максимальный порядковый номер потока (равен количеству потоков)
     static int maxNumber = 3;

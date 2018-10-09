@@ -23,7 +23,7 @@ public class Methodist {
             }
             System.out.println( letter );
 
-            //увеличиваем счётчик
+            //меняем положение переключателя "counter"
             if (counter != maxNumber) {
                 counter++;
             } else {

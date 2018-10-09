@@ -13,6 +13,7 @@ public class MyLetterThread implements Runnable {
     //конструктор
     public MyLetterThread(char letter, int exitNumber, Methodist m) {
         this.letter = letter;
+        //задаем сюда общий переключатель из класса MainABC
         this.counter = MainABC.counter;
         this.exitNumber = exitNumber;
         this.t = new Thread( this );
