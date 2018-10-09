@@ -13,9 +13,9 @@ public class MyLetterThread implements Runnable {
     boolean monitorState = false;
 
     //конструктор
-    public MyLetterThread(char letter, int exitNumber, int counter, Methodist m) {
+    public MyLetterThread(char letter, int exitNumber, Methodist m) {
         this.letter = letter;
-        this.counter = counter;
+        this.counter = MainABC.counter;
         this.exitNumber = exitNumber;
         this.t = new Thread( this );
         t.start();
@@ -26,7 +26,7 @@ public class MyLetterThread implements Runnable {
     @Override
     public void run() {
         //пока: counter!=exitNumber поток спит
-            counter = m.printLetter(letter);
+           m.printLetter(letter, exitNumber);
             m.prince();
     }
 

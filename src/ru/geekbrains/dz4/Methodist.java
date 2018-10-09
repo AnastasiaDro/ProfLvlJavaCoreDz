@@ -6,8 +6,12 @@ public class Methodist {
     int exitNumber;
     int counter;
 
+    public Methodist(int counter){
+        this.counter = counter;
+    }
 
-    synchronized int printLetter(char letter) {
+
+    synchronized int printLetter(char letter, int exitNumber) {
         for (int i = 0; i < 5; i++) {
             while (exitNumber!= counter) {
                 try {
@@ -20,11 +24,11 @@ public class Methodist {
 
             //увеличиваем счётчик
             if (counter != 3) {
-                counter++;
+                 counter++;
             } else {
-                counter=1;
+                counter = 1;
             }
-            //notifyAll();
+            MainABC.setCounter( counter );
         }
        return counter;
     }
@@ -38,5 +42,7 @@ public class Methodist {
         }
     }
 
-
+    public synchronized void setCounter(int counter) {
+        this.counter = counter;
+    }
 }
