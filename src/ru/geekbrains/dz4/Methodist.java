@@ -1,30 +1,31 @@
 package ru.geekbrains.dz4;
 
-import jdk.nashorn.internal.ir.IfNode;
+
 
 public class Methodist {
-    int exitNumber;
+    int maxNumber;
     int counter;
 
-    public Methodist(int counter){
+    public Methodist(int counter, int maxNumber) {
         this.counter = counter;
+        this.maxNumber = maxNumber;
     }
 
 
     synchronized void printLetter(char letter, int exitNumber) {
         for (int i = 0; i < 5; i++) {
-            while (exitNumber!= counter) {
+            while (exitNumber != counter) {
                 try {
                     wait();
-                } catch (InterruptedException e){
-                    System.out.println("ошибка "+ letter);
+                } catch (InterruptedException e) {
+                    System.out.println( "ошибка " + letter );
                 }
             }
-            System.out.println(letter);
+            System.out.println( letter );
 
             //увеличиваем счётчик
-            if (counter != 3) {
-                 counter++;
+            if (counter != maxNumber) {
+                counter++;
             } else {
                 counter = 1;
             }
@@ -35,7 +36,4 @@ public class Methodist {
         }
     }
 
-    public synchronized void setCounter(int counter) {
-        this.counter = counter;
-    }
 }
