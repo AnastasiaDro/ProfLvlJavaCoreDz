@@ -11,7 +11,7 @@ public class Methodist {
     }
 
 
-    synchronized int printLetter(char letter, int exitNumber) {
+    synchronized void printLetter(char letter, int exitNumber) {
         for (int i = 0; i < 5; i++) {
             while (exitNumber!= counter) {
                 try {
@@ -29,16 +29,9 @@ public class Methodist {
                 counter = 1;
             }
             MainABC.setCounter( counter );
-        }
-       return counter;
-    }
+            //разбудить других
+            notifyAll();
 
-    public void prince() {
-        notifyAll();
-        try {
-            this.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
