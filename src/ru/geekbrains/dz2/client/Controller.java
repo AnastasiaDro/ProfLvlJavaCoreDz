@@ -9,9 +9,7 @@ import javafx.scene.layout.HBox;
 import ru.geekbrains.dz2.server.AuthService;
 import ru.geekbrains.dz2.server.ClientHandler;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.net.URL;
 import java.sql.*;
@@ -51,6 +49,14 @@ public class Controller implements Initializable {
             msgPanel.setManaged(true);
             authPanel.setVisible(false);
             authPanel.setManaged(false);
+
+            //Чтение истории из файла
+            HistoryReader historyReader = new HistoryReader();
+            try {
+                textArea.setText(historyReader.readHistory());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         } else {
             msgPanel.setVisible(false);
             msgPanel.setManaged(false);
@@ -69,6 +75,8 @@ public class Controller implements Initializable {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
+  //Создадим historyWriter
+                    HistoryWriter historyWriter = new HistoryWriter();
                     try {
                         while (true) {
                             String s = in.readUTF();
@@ -76,23 +84,38 @@ public class Controller implements Initializable {
                                 setAuthhorized(true);
                                 //новая строка, упереть тут логин
 
-
-
                                 break;
                             }
                             textArea.appendText(s + "\n");
+
                         }
 
                         while (true) {
                             String s = in.readUTF();
                             textArea.appendText(s + "\n");
+   //здесь запишем пришедшее из сервера сообщение в историю переписки
+                           historyWriter.writeHistory( s );
+
+            //               historyWriter.closeHistoryWriter();
+                           //
+//                            System.out.println("Записали: "+ s+"\n");
+//                            вот так работает:
+//                            BufferedWriter testWriter = new BufferedWriter( new FileWriter( "src\\ru\\geekbrains\\dz2\\client\\history.txt", true ) );
+//                            testWriter.write( s+"\n" );
+//                            testWriter.close();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
+
                         setAuthhorized(false);
+
                         try {
+
+ //закрываю ли я здесь свой FileWriter????
+                            historyWriter.closeHistoryWriter();
                             socket.close();
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -108,9 +131,7 @@ public class Controller implements Initializable {
     }
 
     public void sendAuthMsg(){
-        // "/auth login pass"
         try {
-            //новая строка
             login = loginField.getText();
             System.out.println("Логин из поля ввода "+login);
             out.writeUTF("/auth " + loginField.getText() + " " + passField.getText());
@@ -161,8 +182,6 @@ public class Controller implements Initializable {
         System.out.println("Логин перед отправлением в statement "+ login);
         stmtChanging.setString( 1, login);
         int rs = stmtChanging.executeUpdate();
-
-
         //конец изменений
         //дисконнект
         try {
@@ -171,9 +190,6 @@ public class Controller implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
 
     }
 

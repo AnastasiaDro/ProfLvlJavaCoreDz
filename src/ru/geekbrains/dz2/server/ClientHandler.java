@@ -1,6 +1,6 @@
 package ru.geekbrains.dz2.server;
 
-import ru.geekbrains.dz2.client.Controller;
+import ru.geekbrains.dz2.client.HistoryReader;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -57,8 +57,6 @@ public class ClientHandler {
 // конец
 
                         String msg = in.readUTF();
-
-
                         //здесь надо поменять ник
 
                         System.out.println(nick + ": " + msg);
