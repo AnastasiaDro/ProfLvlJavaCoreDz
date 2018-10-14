@@ -29,6 +29,9 @@ public class ClientHandler {
             this.socket = socket;
             this.in = new DataInputStream(socket.getInputStream());
             this.out = new DataOutputStream(socket.getOutputStream());
+
+
+   //Поток    для фабрики
             new Thread(() -> {
                 try {
                     while (true) {
@@ -75,10 +78,17 @@ public class ClientHandler {
                 }
 
             }).start();
+
+
+ //конец потока для фабрики
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     public void sendMsg(String msg) {
         try {

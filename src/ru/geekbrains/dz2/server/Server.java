@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
     private Vector<ClientHandler> clients;
@@ -18,11 +20,21 @@ public class Server {
         try(ServerSocket serverSocket = new ServerSocket(8189)){
             clients = new Vector<>();
             authService = new AuthService();
+    //FIXME
+    //Сюда вставили executorService
+            ExecutorService executorService = Executors.newCachedThreadPool();
+     //FIXME
+
+
             authService.connect();
             System.out.println("ServerMain started...Waiting for clients");
             while (true){
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected " + socket.getInetAddress() + " " + socket.getPort() + " " + socket.getLocalPort());
+
+
+
+  //вот тут добавляем executorServise
                 new ClientHandler(this, socket);
             }
         } catch (IOException e){
