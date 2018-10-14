@@ -32,7 +32,7 @@ public class ClientHandler {
 
 
    //Поток    для фабрики
-            new Thread(() -> {
+//            new Thread(() -> {
                 try {
                     while (true) {
                         String msg = in.readUTF();
@@ -77,7 +77,7 @@ public class ClientHandler {
                     }
                 }
 
-            }).start();
+//            }).start();
 
 
  //конец потока для фабрики
