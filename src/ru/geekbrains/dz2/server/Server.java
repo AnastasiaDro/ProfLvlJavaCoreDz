@@ -20,11 +20,9 @@ public class Server {
         try(ServerSocket serverSocket = new ServerSocket(8189)){
             clients = new Vector<>();
             authService = new AuthService();
-    //FIXME
+    //Создаем при создании сервера новый пул потоков
     //Сюда вставили executorService
             ExecutorService executorService = Executors.newCachedThreadPool();
-     //FIXME
-
 
             authService.connect();
             System.out.println("ServerMain started...Waiting for clients");
@@ -32,9 +30,10 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected " + socket.getInetAddress() + " " + socket.getPort() + " " + socket.getLocalPort());
 
+  //Создадим переменную, ссылающуюся на наш сервер, чтобы использовать её при создании экземпляра CientHandler-а вместо this
                 Server server = this;
 
-  //вот тут добавляем executorServise
+  //при подключении клиента отводим ему один из потоков нашего пула
                 executorService.execute( new Runnable() {
                     @Override
                     public void run() {

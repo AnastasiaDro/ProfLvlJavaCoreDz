@@ -31,7 +31,7 @@ public class ClientHandler {
             this.out = new DataOutputStream(socket.getOutputStream());
 
 
-   //Поток    для фабрики
+   //Код потока перенесён в Runnable executorServise в классе Server
 //            new Thread(() -> {
                 try {
                     while (true) {
