@@ -107,13 +107,13 @@ public class Controller implements Initializable {
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
-
+                        historyWriter.closeHistoryWriter();
                         setAuthhorized(false);
 
                         try {
 
  //закрываю ли я здесь свой FileWriter????
-                            historyWriter.closeHistoryWriter();
+
                             socket.close();
 
                         } catch (IOException e) {
