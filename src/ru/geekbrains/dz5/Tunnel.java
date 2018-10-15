@@ -6,6 +6,8 @@ public class Tunnel extends Stage {
         this.description = "Тоннель " + length + " метров";
     }
     @Override
+
+
     public void go(Car c) {
         try {
             try {

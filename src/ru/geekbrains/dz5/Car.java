@@ -29,6 +29,8 @@ public class Car implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//запускает машину по всем сценам (дорога, тоннель, дорога)
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
