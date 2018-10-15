@@ -1,5 +1,7 @@
 package ru.geekbrains.dz5;
 
+import ru.geekbrains.dz1.part1.Main;
+
 public class Car implements Runnable {
     private static int CARS_COUNT;
     static {
@@ -26,6 +28,13 @@ public class Car implements Runnable {
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
+//FIXME
+//Автомобиль готов, условие выполнено, уменьшаем счётчик CountDownLatch на 1
+        MainClass.setDownStart();
+//метод await() блокирует поток, вызвавший его, до тех пор, пока
+//счетчик CountDownLatch не станет равен 0
+//FIXME
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,5 +43,10 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+
+
+
+
+
     }
 }
