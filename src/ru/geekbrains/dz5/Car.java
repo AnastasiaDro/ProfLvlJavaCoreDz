@@ -30,7 +30,7 @@ public class Car implements Runnable {
             System.out.println(this.name + " готов");
 //FIXME
 //Автомобиль готов, условие выполнено, уменьшаем счётчик CountDownLatch на 1
-        MainClass.setDownStart();
+        MainClass.awaitStartOrFinish(MainClass.getStart());
 //метод await() блокирует поток, вызвавший его, до тех пор, пока
 //счетчик CountDownLatch не станет равен 0
 //FIXME
@@ -43,6 +43,11 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+
+
+//FIXME
+//Ждём, когда все финишируют
+        MainClass.awaitStartOrFinish( MainClass.getFinish());
 
 
 

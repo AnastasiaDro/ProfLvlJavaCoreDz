@@ -1,26 +1,30 @@
 package ru.geekbrains.dz5;
 
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
 
 public class MainClass {
 
+//FIXME
+//Метод ожидания спадения барьера
 
-//Метод уменьшаем счётчик латча и замораживаем, пока не станет старт wait
-    public static void setDownStart() {
+    public static void awaitStartOrFinish(CyclicBarrier myBarrier) {
         try {
-            START.countDown();
-            START.await();
+            myBarrier.await();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (BrokenBarrierException e) {
             e.printStackTrace();
         }
     }
-    public static void setDownFinish() {
-        try {
-            FINISH.countDown();
-            FINISH.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+    public static CyclicBarrier getStart(){
+        return START;
+    }
+
+    public static CyclicBarrier getFinish(){
+        return FINISH;
     }
 
 
@@ -28,8 +32,23 @@ public class MainClass {
 
     public static final int CARS_COUNT = 4;
     //FIXME
-    private static final CountDownLatch START = new CountDownLatch( CARS_COUNT+1 );
-    private static final CountDownLatch FINISH = new CountDownLatch( 8 );
+ //СДЕЛАТЬ ОДНИМ МЕТОДОМ!!!!! СОздание старта и финиша. Как вариант
+
+
+    private static final CyclicBarrier START = new CyclicBarrier( CARS_COUNT, new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
+        }
+    }
+ );
+    private static final CyclicBarrier FINISH = new CyclicBarrier( CARS_COUNT, new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
+        }
+    }
+    );
     //FIXME
 
 
@@ -59,9 +78,8 @@ public class MainClass {
 //ПОДОЖДАТЬ всех участников
 //Дать объявление о начале
 
-        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
-//Ещё раз уменьшаем наш START
-        START.countDown();
+//        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
+
 
 //FIXME
 //вывести, только когда гонки кончились
