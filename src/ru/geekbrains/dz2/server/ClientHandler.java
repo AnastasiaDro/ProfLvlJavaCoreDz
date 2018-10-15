@@ -29,7 +29,10 @@ public class ClientHandler {
             this.socket = socket;
             this.in = new DataInputStream(socket.getInputStream());
             this.out = new DataOutputStream(socket.getOutputStream());
-            new Thread(() -> {
+
+
+   //Код потока перенесён в Runnable executorServise в классе Server
+//            new Thread(() -> {
                 try {
                     while (true) {
                         String msg = in.readUTF();
@@ -74,11 +77,18 @@ public class ClientHandler {
                     }
                 }
 
-            }).start();
+//            }).start();
+
+
+ //конец потока для фабрики
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     public void sendMsg(String msg) {
         try {
