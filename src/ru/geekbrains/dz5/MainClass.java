@@ -12,9 +12,7 @@ public class MainClass {
     public static void awaitStartOrFinish(CyclicBarrier myBarrier) {
         try {
             myBarrier.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (BrokenBarrierException e) {
+        } catch (InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
         }
     }
