@@ -31,6 +31,9 @@ public class MainClass {
 
 
     public static final int CARS_COUNT = 4;
+    public static int getCarsCount() {
+        return CARS_COUNT;
+    }
     //FIXME
  //СДЕЛАТЬ ОДНИМ МЕТОДОМ!!!!! СОздание старта и финиша. Как вариант
 
